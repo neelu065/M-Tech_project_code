@@ -1,0 +1,44 @@
+Equation \ref{2D_airfoil_thickness} represents the formula to obtain the half-thickness of symmetric NACA four-digit foil.
+\begin{equation}
+y_{t}=5 t\left[0.2969 \sqrt{x}-0.1260 x-0.3516 x^{2}+0.2843 x^{3}-0.1015 x^{4}\right]
+\label{2D_airfoil_thickness}
+\end{equation}
+where,\\
+$x$ is position along the chord from 0 to 1\\
+$y_t$ is the half thickness for a given $x$\\
+$t$ is the maximum thickness represented in terms of chord\\
+
+The above equation represents the blunt airfoil shape at the trailing edge. If a sharp trailing edge is required, one of the coefficients should be modified to zero their sum. Modifying the last coefficient to $-0.1036$ will result in a small change in the overall shape of the airfoil, and a sharp trailing edge is obtained. Adding further, equation \ref{2d_airfoil_camber} represents the formula for calculating the camber line location from the chord line.
+\begin{equation}
+y_{c}=\left\{\begin{array}{ll}
+\frac{m}{p^{2}}\left(2 p\left(\frac{x}{c}\right)-\left(\frac{x}{c}\right)^{2}\right), & 0 \leq x \leq p c \\
+\frac{m}{(1-p)^{2}}\left((1-2 p)+2 p\left(\frac{x}{c}\right)-\left(\frac{x}{c}\right)^{2}\right), & p c \leq x \leq c
+\end{array}\right.
+\label{2d_airfoil_camber}
+\end{equation}
+where,\\
+$m$ is the maximum camber, \\
+$p$ is the location of maximum camber, \\
+
+Since the airfoil in interest is symmetric one. So, both the camber line and chord line coincide, resulting in $y_c$ equal zero for all cases.
+\begin{equation}
+\begin{array}{ll}
+x_{U}=x-y_{t} \sin \theta, & y_{U}=y_{c}+y_{t} \cos \theta, \\
+x_{L}=x+y_{t} \sin \theta, & y_{L}=y_{c}-y_{t} \cos \theta,
+\end{array}
+\label{2d_upper_lower_points}
+\end{equation}
+where,
+\begin{equation}
+\theta=\arctan \frac{d y_{c}}{d x}
+\end{equation}
+
+The coordinates ($x_U$, $y_U$), and ($x_L$, $y_L$) presents the lower and upper airfoil surface coordinates. Since the airfoil is symmetric, $y_c$ is equal zero. This implies $\theta$ equals zero. Equation \ref{2d_upper_lower_points} turns out to be,
+\begin{equation}
+\begin{array}{ll}
+x_{U}=x, & y_{U}=y_{c}+y_{t}, \\
+x_{L}=x, & y_{L}=y_{c}-y_{t},
+\end{array}
+\label{2d_final_points}
+\end{equation}
+

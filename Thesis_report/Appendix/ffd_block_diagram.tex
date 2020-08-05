@@ -1,0 +1,28 @@
+
+% Define block styles
+
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, text centered, rounded corners, text width=10em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{block1} = [rectangle, draw, fill=blue!20, text centered, text width=10em]
+\tikzstyle{block12} = [trapezium, trapezium left angle=70, trapezium right angle=110, text centered, draw=black, fill=blue!20, text width=10em]
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}[node distance = 2cm, auto]
+    % nodes
+    \node [block] (continue) {\Large Continued ...};
+    \node [block12, below of = continue] (parameter) {\large Parametric baseline wing};
+    \node [block12, right of = parameter, node distance = 7cm] (cp_new) {\large Perturbed control points};
+    \node [block1, below of= parameter, node distance = 2cm] (ffd_box) {\large FFD box equation};
+    \node [block, below of= ffd_box, node distance = 2cm] (final) {\large Perturbed cartesian wing coordinates};
+    
+    % edges
+    \path [line] (continue) -- (parameter);
+    \path [line] (continue) -| (cp_new);
+    \path [line] (parameter) -- (ffd_box);
+    \path [line] (cp_new) |- (ffd_box);
+    \path [line] (ffd_box) -- (final);
+  \end{tikzpicture}
+  \caption{Block diagram representing the input and output to FFD box equation.}
+  \label{ffd_diagram}
+\end{figure}

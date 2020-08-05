@@ -1,0 +1,76 @@
+\chapter{constraint}
+This chapter consists of the constraint which are being implemented in various papers and are listed below. 
+
+\section{\underline{D.W.Zingg}}
+
+The optimization problem is to minimize the drag coefficient ($C_D$), which is the function of \textbf{v} and \textbf{q}, where \textbf{v} is the vector of geometric DV, and \textbf{q} are the flow variables.
+
+\subsection{Design Variables}
+\begin{itemize}
+\item The root of the wing is fixed in all three dimensions - \textbf{though sectional control and chord changes are permitted.}
+\item Either an AoA or root twist should be a design variable.
+\item At points other than root all DV are permitted to get perturbed : twist, taper, sectional, sweep, span and dihedral subjected to linear or non-linear constraint.
+\end{itemize}
+
+\subsection{Constraints}
+
+\begin{itemize}
+\item C$_L$ must be 0.375.
+\item Projected are must be constrained to initial value 3.06 units.
+\item Total volume should be at least 0.245 sq. units, which includes both body and wing tip cap.
+\item Root Bending Moment constraint $C_{M_x}$ = ???.
+\item Twist is limited to $\pm 2.0 $ degrees.
+\item Chord can vary between 0.45 to 1.550.
+\item Cross-sectional thickness may not vary by more than $\pm$ 50$\%$.
+\item Span may vary between 2.46 to 3.67.
+\item Sweep is achieved by shearing the wing while maintaining the span such that the quarter chord location at the tip is no more than \textbf{$\pm$ 1 chord length} from its original position.
+\item \textbf{Dihedral may not take a value such that the vertical position of the quarter chord lies more than 0.45 chord lengths above or below its initial position.}
+\end{itemize}
+
+\section{\underline{Chernukhin}}
+\subsection{Geometry}
+Baseline Geometry is NACA0012 with sharp trailing edge.
+\begin{itemize}
+\item Semi span = 3.06 units.
+\item Geometry is rectangular and planar, with no twist, taper, sweep or dihedral also with \textbf{pinched wingtip cap} over the last 0.06 units of span.\cite{oleg} 
+\end{itemize}
+\subsection{Constraint}
+Constraints implemented by \textbf{Chernukhin} are as follows:
+
+The paper is focused on \textbf{optimizing of cross sections} of wing by allowing the interior points to move only in vertical direction. 
+\begin{itemize}
+\item $C_L$ = 0.2625
+\item Volume = at least 6.57 $\times$ 10$^{-2}$, which is the volume of the original wing.
+\item Projected area (Semi-span) is constrained to 4/3.
+\item AoA can vary between -3 to +6 deg.
+\item \textbf{The control point at the trailing edge can have a maximum span wise extent of 2.4, maximum sweep back to 1.00, from the original value of 0.33, vertical bounds  are -0.3 and 0.3.}
+\item Each sections are allowed to twist and change its shape.
+\item Both leading and trailing edges can be curved.
+\end{itemize}
+
+Local optimum 2 is better than local optimum 7. (ref table 2 from paper). 
+
+\section{\underline{D.J.Poole}}
+\subsection{Constriants}
+In the Previous two papers the DV are the position of control points. But in this paper the DV are the geometric parameters like chord, thickness, etc., of the wing. And is mathematically represented by,
+
+$$  
+\begin{aligned} 
+{0.2625-C_{L} \leq 0} \implies \text{Coefficient of Lift} \\ 
+{C_{M_{x}}-0.1069 \leq 0} \implies \text{Root bending moment}\\
+{V_{initial}-V \leq 0} \implies \text{Volume}\\ 
+{2.46 \leq s \leq 3.67} \implies \text{semi span}\\ 
+{S} = S_{initial} \implies \text{Baseline } \\
+ {-3.0} \leq \alpha_{1} \leq 6.0 \implies \text{AoA} \\
+ -3.12  \leq \alpha_{2} \leq 3.12 \implies \text{Twist}\\
+ 0.06  \leq \alpha_{i} \leq 0.18 \quad \forall i \in[3,7] \implies \text{Thickness at five section}\\
+ -0.45  \leq \alpha_{i} \leq 0.45 \quad \forall i \in[8,12] \implies \text{$\Delta$z$_{qc}$ at five section}\\
+ -1  \leq \alpha_{i} \leq 1 \quad \forall i \in[13,17] \implies \text{$\Delta$x$_{qc}$ at five section}\\
+ 0.45  \leq \alpha_{i} \leq 1.55 \quad \forall i \in[18,22] \implies \text{chord at five section}
+ \end{aligned}
+$$ 
+
+\section{Surface Mesh Details}
+\textbf{Two meshes}\cite{control} were generated. The coarser mesh comprised 1.8 M points; \textbf{193 $\times$ 81 points on the surface}, 49 points in the wake slit and tip slit, and 49 normal points. The finer mesh comprised 3.7 M points; \textbf{225 $\times$ 97 points on the surface}, 65 points in the wake slit and tip slit, and 65 normal points. The block structure, farfields and two views of selected planes in the 1.8 M point mesh are shown in fig 18.
+
+The mesh has a 129 $\times$ 41 surface mesh, 33 nodes on either side of the wake, and 41 nodes between the inner and outer boundary.\cite{Poole1}

@@ -1,0 +1,15 @@
+\begin{equation}
+\mathbf{v}_{n}=\mathbf{x}_{I N N_{n}}(t)+F\left(\mathbf{x}_{r_{1}}(t)-\mathbf{x}_{r_{2}}(t)\right)
+\label{fINRAND1_equation}
+\end{equation}
+where,
+
+$$
+I N N_{n}=\left\{
+\begin{array}{ll}
+{\underset{i \in\{N, 2\}}{\arg \min} \left\|\mathbf{x}_{n}-\mathbf{x}_{i}\right\|_{2}} & {\text { if } n=1} \\
+{\underset{i \in\{N-1,1\}}{\arg \min}\left\|\mathbf{x}_{n}-\mathbf{x}_{i}\right\|_{2}} & {\text { if } n=N} \\
+{\underset{i \in\{n-1, n+1\}}{\arg \min}\left\|\mathbf{x}_{n}-\mathbf{x}_{i}\right\|_{2}} & {\text { otherwise }}
+\end{array}
+\right.
+$$

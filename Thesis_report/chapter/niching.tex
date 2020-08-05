@@ -1,0 +1,111 @@
+\chapter{Niching Algorithms}
+\label{niching}
+\section{Background}
+Aerodynamic shape optimization (ASO) is defined as finding the shape that optimizes a performance quantity subject to drag, geometrical constraints. Much of the work carried out in the past involved finding the single best optimum solution. However, during the design process, identifying other optimal designs may positively impact the cost and performance. Many aerodynamics optimization problems can be unimodal or multimodal. The parallel niching optimization algorithms direct the given multimodal optimization problem to identify the multiple optima in the given design space. This chapter contains a detailed explanation of the DE based parallel niching algorithms.
+
+Differential evolution (DE) algorithm deals with finding the best result for a given objective function. However, this is normal when the problem is of type Unconstrained Numerical Optimization problems (UNOPs). If the objective function possesses the constraints (equality or inequality) generally called as Constrained Numerical Optimization problems (CNOPs), then DE is not designed to handle the constraint and which limits its scope to UNOPs. To solve the CNOPs, a modification to the DE algorithm at some stage in its hierarchy is necessary.
+
+ Furthermore, the DE generally results in a global optimum, which again limits its scope to a problem where finding a global optimum is prior important. In case of problems where finding multiple good solutions is important rather than the best solution, a modification to the DE algorithm is necessary. These modifications will help obtain multiple optimum values (good results), also called as \textbf{multimodal optimization problem}. These modifications to the DE algorithm results in \textbf{Niching Algorithms}. These techniques will enhance the population’s diversity by locating the optimal solution that lies in different parts of the search space. A considerable amount of research has taken place in constraint handling and multimodal optimization using a nature-inspired algorithm. Upcoming sections contain a detailed explanation  on DE and the modification to algorithms.
+\input{algorithm/DE_explanation.tex}
+
+\section{Constraint handling}
+The feasibility rules published by Deb \cite{Daniel} assist in handling the constraints to the problems. The rules are as stated: when choosing between two
+locations, if both locations are feasible, the one with the best fitness value wins. If a single location is feasible, then select the same. Otherwise, select the location with the least constraint violations. Mathematically, using domination operator, where, given two locations $x_a$ and $x_b$, $x_b$ dominates $x_a$ based on the following:
+\input{equation/equation1.tex}
+
+where $\phi$ is the constraint violation given by:
+\input{equation/equation2.tex}
+
+In DE, these feasibility rules are commonly used in the selection step to determine whether the trial vector should
+replace the target vector. Hence at selection stage:
+\input{equation/equation3.tex}
+
+\section{Control variable}
+
+There are a few parameters that decide the algorithm progress towards the optimal points. The NP, F, and CR are the important parameters in the DE algorithm. D.J.Poole\cite{storn} states that it is not difficult to guess the range of values for these algorithms. According to the author, NP is to be between 5D and 10D. A value of F = 0.5 is usually the right choice. Furthermore, for CR probability, a value of 0.1 would work fine. However, the higher the value of CR faster will be the convergence. So it always the right choice to test the algorithm with a CR value of 0.9.
+
+\section{Parallel and Sequential decomposition}
+There are two ways to implement the algorithm, sequential flow, and parallel flow. Taking DE into consideration, the sequential form of DE constitutes the mutation, crossover, and selection phases in sequential order. For each population within a design space, all these phases are carried out in sequential order, as shown in fig[\ref{sequential_form_algo}]. However, this will result in an inefficient implementation. Instead, a parallel form of implementation can be followed. Here, the entire population is subjected to mutation, crossover, selection phases at once. Then, the comparison between the populations is carried out later. 
+
+The most expensive part of the aerodynamic optimization problem is objective function evaluation, which is CFD evaluation. In the case of solving the above problem, the parallel decomposition of algorithm wins over the sequential. Also, each of the population can be thread into single processing resulting in parallel computation of the CFD simulations as shown in fig \ref{parallel_form_algo}. The pictorial representation of both parallel and sequential decomposition of the algorithm is as shown below,
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[scale = 0.5]{figures/sequential_form_DE.png}
+    \caption{Sequential decomposition of algorithm\cite{Poole2}.}
+    \label{sequential_form_algo}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[scale = 0.5]{figures/parallel_form_DE.png}
+    \caption{Parallel decomposition of algorithm\cite{Poole2}.}
+    \label{parallel_form_algo}
+\end{figure}
+
+\section{Sequential Niching algorithm}
+As mentioned before, there are two ways to implement the DE algorithm. The upcoming subsections explain different sequential niching algorithms. Among these, few of the niching algorithms are recreated in python and implemented on test functions like Ackley function, Rastrigin function, and Egg holder function. The result coincides with the one published by the author and is discussed in chapter \ref{results}. 
+
+The algorithm involved in aerospace optimization generally follows the population crowding technique\cite{De_jong,thomsen}, fitness sharing\cite{michigan,thomsen,goldberg}, clearing\cite{petrowski}, speciation\cite{balazs,Li}, local neighborhoods\cite{vrahatis,vrahatis_1}, to name a few. Li $et$ $al$. present a full review of these properties\cite{li_1}. Following are few of the sequential niching algorithms which are implemented in python and as follows\cite{Poole3}, 
+$$
+\begin{array}{l}
+{\bullet \text { Feasible DE }(\mathrm{fDE}), \text { which is based on canonical DE, }} \\ 
+{\bullet \text { Feasible DE using nrandl mutation (fNRAND1), }}\\
+{\bullet \text { Feasible DE using inrand } 1 / r \text { (nearest neighbour with ring network) mutation (fINRAND1), }} \\
+{\bullet \text { Feasible crowding DE (fCDE), which is based on the CDE algorithm, }} \\
+{\bullet \text { Feasible neighbourhood-based CDE (fNCDE), which is based on the NCDE algorithm,  }} \\ {\bullet \text { Feasible species-based DE (fSDE), which is based on the SDE algorithm, }} \\
+{\bullet \text { Feasible neighbourhood-based SDE (fNSDE), which is based on the NSDE algorithm, }} \\ {\bullet \text { Feasible fitness-sharing DE (fSHDE), which is based on the SHDE algorithm, }}
+\end{array}
+$$
+
+
+\subsection{fDE}
+In this algorithm the selection stage is modified as stated by Deb and Saha\cite{Deb}, which uses equation [\ref{selection_constraint}]. further in the mutation stage, algorithm follows $rand/1/bin$ strategy.
+\input{algorithm/fDE.tex}
+
+\subsection{fNRAND1}
+In this algorithm, mutation stage is modified by taking the target vector of the \(n\)-th individual's nearest neighbour $x_{{NN}_n}$ as the base vector as shown. selection stage uses equation [\ref{selection_constraint}] as feasibility check.
+\input{equation/fNRAND1_equation.tex}
+\input{algorithm/fNRAND1.tex}
+
+\subsection{fINRAND1}
+This algorithm work similarly to the above mentioned, however in the mutation stage, the algorithm uses the target vector of the \(n\)-th individual’s nearest neighbor within its local neighborhood, $x_{INN_n}$, as the base vectors. Since it uses an index-based ring neighborhood, this algorithm reduces the computational complexity against the fNRAND1 algorithm.
+\input{equation/fINRAND1_equation.tex}
+again in the selection stage equation [\ref{selection_constraint}] is used as feasibility criteria.
+\input{algorithm/fINRAND1.tex}
+
+\subsection{fCDE}
+This algorithm uses the standard CDE algorithm but with feasibility selection rules in the selection phase. In the CDE algorithm, the closest individual $ {x}_{u_{n}} $ to the trial vector is found. Then the closed individual is replaced by the trial vector if the trial vector is better. This is evaluated by determining using feasibility rules as stated in equation \ref{feasibility_rules}.
+
+\input{equation/fCDE_equation.tex}
+\input{algorithm/fCDE.tex}
+
+\subsection{fNCDE}
+As the name indicates, fNCDE, this algorithm follows the neighborhood search method. In this algorithm, the trial vector is generated from m nearest individuals to the n-th individual, in the design space. While performing mutation, all three vectors come from the m nearest neighbors. Further steps are the same as normal crowding DE.
+\input{algorithm/fNCDE.tex}
+
+\subsection{fSDE}
+As compared to the above algorithms, this algorithm is considered to be the most time-consuming in terms of implementation and function evaluation. In this algorithm, initially, the population needs to sort in the ascending order satisfying the feasibility rules. If the individual satisfies the feasibility rules, then they are sorted based on the fitness values. However, any individuals violating the feasibility rules; they will be sorted in ascending order based on the constraint violations. Altogether both the populations are represented under the same variable name. The list is sorted from entire populations with the most feasibility individual at first in the list, and the individual violating at high degree will be placed at the last in the list. Furthermore, species are determined based on the distance from the species seed.  
+
+Additionally, the species radius $\sigma$ is set by the user. If the species has less than m (user-defined) individuals, then the extra individuals are randomly added to the species radius to make all equal sets of individuals around every species. During rand/1 mutation, r1, r2, and r3 are uniformly distributed random integers are selected from m individuals of the species representing the n-th individual. Since the population has been increased, only the first N fittest individuals are kept for the next iteration, determined by feasibility rules. The overall algorithm is outlined in the algorithm mentioned below.
+\input{algorithm/fSDE.tex}
+
+\section{Parallel niching algorithm}
+The parallel niching algorithm involves performing mutation to all individuals, then subjecting all individuals to cross-over phase, further to selection phases. All these phases are performed in separate loops. Furthermore, it results in separating the workload and performed in different threads of the CPU. The bottleneck in the wing shape optimization is objective function evaluation (CFD simulation). All populations can be subjected to the individual thread for CFD simulation to obtain better performance and time-efficient. For example, the fNRAND1 algorithm with parallel decomposition is highlighted in the algorithm [\ref{fNRAND1_parallel_algorithm}].
+\input{algorithm/fNRAND1_parallel}
+\section{Parameter Tuning}
+From the literature review, a higher number of generations will result in tremendous computational resources. The number of runs on each function set to be fifty for all the niching algorithms, while the population size is suggested to maintain $N=40 \sqrt{D N_{g}}$. Also, each niching algorithms perform better at a specific range of mutation factor and a crossover probability. The author D.J.Poole\cite{Poole3} suggested the values after considering all these factors and is mentioned in table \ref{parameter tuned for niching algorithm}. 
+\input{tables/table2.tex}
+
+\section{Conclusion}
+
+The two neighborhood-based
+algorithms (fNSDE and fNCDE) have the fastest overall convergence rates. However, fNSDE
+has little difficulty finding all of the optima quickly, and the niches formed appear to be \textbf{unstable}. For example, fNSDE locates all of the optima rapidly and then cannot maintain these niches. However, for function F14(\textit{modified Rastrigin function}), the majority of optima are located. But the niches are unstable and ended with global optima. On the other hand, fNCDE located optima at a slightly slower rate than fNSDE but is better able to maintain stable niches. The average convergence speed of fDE is lower than fCDE, fINRAND1, fSDE and fSHDE, which requires (sometimes considerably) greater complexity compared to fDE.
+
+In terms of algorithmic development, fINRAND1 and fNRAND1 require the least effort to develop, with only a few extra lines of code added and no change in code logic. On comparing \textbf{fDE} and \textbf{fNRAND1}, the \textbf{fNRAND1 is superior} in terms of convergence speeds, peak ratios, and success rates. The fNRAND1 involves finding the nearest neighbor individual, increasing the algorithm complexity by up to $O(N^2)$ per iteration, compared to $O(N)$ for fDE.
+
+The fDE inherently has difficulty maintaining stable niches and appears to converge to global optima or single optima. For function F14 (Himmelblau function), it appears that fDE has four optimal. However, with few more generations, all optimal points converge to a single point.
+
+When the quantity of \textbf{function evaluations is high}, the comparison of PR (Peak Ratio) points to three unique best-performing algorithms\cite{Poole3}: \textbf{fCDE, fNCDE, and fNRAND1}. When \textbf{ there is limit over function evaluations}, the explicit winner (defeating all other algorithms) is \textbf{fNSDE}. As discussed before, fNSDE is outstanding at creating niches. Higher the algorithm evolves, the greater are the chance of niches break down. The fNRAND1 is simple to implement, whereas its neighbor, fINRAND1, has an excellent overall performance. The more complex algorithm wins against, the fewer one. However, the trade-off in complexity is a call for an hour.
+
+The results of the test function evaluation will be mentioned in chapter \ref{results}. Furthermore, the respective test function equations will be appended in the appendix \ref{app_c}.

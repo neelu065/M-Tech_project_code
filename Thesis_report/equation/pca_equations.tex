@@ -1,0 +1,54 @@
+The underlying assumption behind this method is: the direction with the highest variance represents the features of interest and is achieved by diagonalizing the covariance matrix of the measurement data. Furthermore, this direction representing the highest variance is called principal components. A reduced-order model is obtained by selecting the first few principal components of the data.
+
+Let the nominal surface geometry be defined by p coordinated points $x_{i}^{0}$ $\in$ $\mathbb{R}^{m}$, $i=1, \ldots, p$,  where m represents the data's dimension. Also, let n sets of measurements 
+$\left\{\hat{x}_{i, j} \in \mathbb{R}^{m} \mid i=1, \ldots, p\right\} ; j=1, \ldots, n$ be available. Here index $j$ refers to a specific instance of measurement, and index $i$ refers to measurements representing a unique nominal coordinate point.
+
+The error from the nominal geometry is given as,
+$$x_{i, j}^{\prime}=\hat{x}_{i, j}-x_{i}^{0}$$
+
+Further, subtracting the error vectors from their mean gives a centered
+
+set of m-dimensional vectors,
+
+\begin{equation}\tilde{x}_{i, j}=x_{i, j}^{\prime}-\bar{x}_{i} \mid i=1, \ldots, p ; j=1, \ldots, n\end{equation}
+
+where the mean of these error vectors is calculated as,
+
+\begin{equation}
+\bar{x}_{i}=\frac{1}{n} \sum_{j=1}^{n} x_{i, j}^{\prime}, i=1, \ldots, p
+\end{equation}
+
+Representing the centered error vectors in a matrix form $\tilde{\textbf{X}}$ with $j^{th}$ column as, $\tilde{X}_{j}=\left[\tilde{x}_{1, j}^{T}, \ldots, \tilde{x}_{p, j}^{T}\right]^{T}$. This implies $\tilde{X}_{j}$ contains the centered set of error vector representing the $j^{th}$ set of measurement. $\tilde{\textbf{X}}$ will be generally of size $mp \times n$ matrix. The covariance matrix of $\tilde{\textbf{X}}$ is given by 
+\begin{equation}
+C_{x}=\frac{1}{n-1} \tilde{X} \tilde{X}^{T}
+\end{equation}
+As mentioned earlier, PCA typically identifies the directions that are mutually uncorrelated to each other. Along with this, it identifies the directions of the greatest variance of the data. This can be achieved by finding a transformation matrix which diagonalizes the covariance matrix $C_x$. One such method is obtaining the eigenvalue of the covariance matrix $C_x$. The more prominent way of approaching this problem is to perform a Singular Value Decomposition (SVD) of a matrix $\tilde{\textbf{X}}$\cite{ghate}.
+\begin{equation}
+\tilde{X}=M \Sigma N^{T}
+\end{equation}
+
+Here, M, N are $mp \times mp$, $n \times n$ orthonormal matrix respectively. And, $\Sigma$ is $mp \times n$ is a diagonal entries ordered in decreasing value. 
+
+Reduced-order modeling is based on selecting the leading modes of the principal components obtained by finding the SVD of the covariance matrix $\tilde{\textbf{X}}$. However, to select a specific number of principal components, the scatter energy method is used. The total scatter energy $E$ is given by,
+\begin{equation}\begin{aligned}
+E &=\operatorname{tr}\left(\tilde{X} \tilde{X}^{T}\right) \\
+&=\operatorname{tr}\left(M \Sigma N^{T} N \Sigma M^{T}\right) \\
+&=\operatorname{tr}\left(M \Sigma \Sigma M^{T}\right) \\
+&=\|M \Sigma\|_{F}^{2}
+\end{aligned}
+\label{random_energy}
+\end{equation}
+where $\|.\|_{F}^{2}$ is the Frobenius norm. Since the Frobenius norm is invariant under unitary multiplication,
+$$E=\|M \Sigma\|_{F}^{2}=\|\Sigma\|_{F}^{2}=\operatorname{tr}\left(\Sigma \Sigma^{T}\right)=\sum_{i=1}^{m p} \lambda_{i}^{2}$$
+
+where $\lambda_i$ is the $i^{th}$ diagonal entry of $\Sigma$. Selecting the first few modes from the matrix $M$ and taking note of their corresponding eigenvalues makes it possible to predict the amount of scatter energy being captured. This is a principal of using PCA based reduced-order modeling.
+
+Another reason for using PCA based reduced-order modeling is the ease of implementation and computational efficiency of the PCA algorithm. SVD is the most popular way of implementing PCA. Predefined modules are available in both MATLAB\textsuperscript{\textregistered} and Python, which further strengthens the use of SVD.
+
+Discussing the derivation of PCA based reduced-order modeling is out of scope here. Therefore, a reduced-order model for the geometric uncertainty can be written as,
+
+\begin{equation}
+x_{r}=x^{0}+\bar{x}+\sum_{k=1}^{n_{r}} a_{k} \mathcal{N}(0,1)
+\end{equation}
+
+where, $n_r \leq mp$ is the number of leading modes selected and $a^k$ is the $k^{th}$ column of $\frac{1}{\sqrt{n}}M\Sigma$. $N(0,1)$ is the random variable with zero mean and unit variance. As $n_r$ increases the total scatter of $x_r$ tends to $\tilde{x}$. Upcoming chapter deals in detail with the application of this method.

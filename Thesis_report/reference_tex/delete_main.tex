@@ -1,0 +1,62 @@
+\documentclass[10pt,twoside]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[nottoc]{tocbibind}              % append the reference to the table of content
+\usepackage{times}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\graphicspath{{images/}}
+\usepackage[a4paper,width =150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{pdfpages}
+\usepackage{float}
+\fontsize{7pt} {7.2}\selectfont
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\leftmark}
+\fancyhead[RE,LO]{\rightmark}
+\fancyfoot[CE,CO]{Indian Institute of Space Science and Technology, Trivandrum }
+\fancyfoot[LE,RO]{\thepage}
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\usepackage{biblatex}
+\addbibresource{references.bib}
+\usepackage[ruled,vlined]{algorithm2e} % used for algorithm formatting
+
+
+% title section
+\title{Thesis Title}
+\author{Author Name}
+\pagenumbering{roman}
+\doublespacing
+
+\begin{document}                   % document begin
+\input{titlepage.tex}
+
+\tableofcontents
+\listoffigures
+
+
+\chapter{Literature Survey}
+\pagenumbering{arabic}
+\input{chapter/literature_review.tex}   % chapter one
+
+\chapter{Niching Method}               % chapter two
+\input{chapter/niching.tex} 
+
+\chapter{Parameterization of wing}     %chapter three
+\input{chapter/parameterization.tex}
+
+\chapter{Solver}                       % chapter four
+\input{chapter/solver.tex}
+
+\chapter{Conclusion}                   % chapter five
+\input{chapter/conclusion.tex}
+
+%\chapter{Constraint}
+%\input{chapter/constraints.tex}
+\printbibliography
+
+\end{document}

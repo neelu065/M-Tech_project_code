@@ -1,0 +1,24 @@
+\begin{equation}
+\mathbf{X}(u, t, s)=\sum_{i=0}^{m} \sum_{j=0}^{n} \sum_{k=0}^{p} \mathbf{a}^{(i, j, k)} f_{i}^{m}(u) g_{j}^{n}(t) h_{k}^{p}(s)
+\label{ffd_3d}
+\end{equation}
+where Bernstein's polynomial $f_{i}^{m}(u)$ is defined as,
+
+\begin{equation}
+f_{i}^{m}(u)=\frac{(m) !}{(i) !(m-i) !} u^{i}(1-u)^{m-i}
+\label{bernstein_poly}
+\end{equation}
+
+The new position of a point $\textbf{X}_{def}$ is computed by:
+
+\begin{equation*}
+\mathbf{X}_{d e f}=\sum_{i=0}^{l}\left(\begin{array}{l}
+l \\
+i
+\end{array}\right)(1-s)^{l-i} s^{i}\left[\sum_{j=0}^{m}\left(\begin{array}{c}
+m \\
+j
+\end{array}\right)(1-t)^{m-j} t^{j}\left(\sum_{k=0}^{n}\left(\begin{array}{l}
+n \\
+k
+\end{array}\right)(1-u)^{n-k} u^{k} \mathbf{P}_{i j k}\right)\right]\end{equation*}

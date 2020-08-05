@@ -1,0 +1,19 @@
+\begin{algorithm}
+\SetAlgoNoLine
+\textbf{Input}: parameters (s,t,u)\\
+\textbf{Output}: new coordinates of the point \textbf{X} for parameters (s,t,u)\\
+  \For{i=0, \dots , l}
+  {
+    \For{j=0, \dots , m}
+    {
+        \For{k=0, \dots , n}
+        {
+        $X=X+\operatorname{binom}(l, i) * \operatorname{pow}(1-s, l-i) * \operatorname{pow}(s, i) *$
+$\operatorname{binom}(m-1, j) * \operatorname{pow}(1-t, m-j) * \operatorname{pow}(t, j) *$
+$\operatorname{binom}(n, k) * \operatorname{pow}(1-u, n-k) * \operatorname{pow}(u, k) * \boldsymbol{P}_{i j k}$
+        }
+    }
+  }
+ \caption{FFD algorithm}
+ \label{ffd_algorithm}
+\end{algorithm}

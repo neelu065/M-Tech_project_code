@@ -1,0 +1,148 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                              %
+% SU2 configuration file                                                       %
+% Case description: Optimization case for the NACA_0012_wing in inviscid flow  %
+% Author: Neelappagouda V H, Devendra P Ghate.	              	               %
+% Institution: Indian Institute of Space science and Technology(IIST).         %
+% Date: 01.04.2020                                                             %
+% File Version 7.2.0 "Blackbird"                                               %
+%                                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ------------- DIRECT, ADJOINT, AND LINEARIZED PROBLEM DEFINITION ------------%  
+%                   
+SOLVER= EULER
+%
+MATH_PROBLEM= DIRECT
+%
+RESTART_SOL= NO
+% -------------------- COMPRESSIBLE FREE-STREAM DEFINITION --------------------%
+%
+MACH_NUMBER= 0.4
+%
+AOA= 3.0
+%
+FREESTREAM_PRESSURE= 101325.0
+%
+FREESTREAM_TEMPERATURE= 288.15
+% -------------------------- CL DRIVER DEFINITION -----------------------------%
+%
+FIXED_CL_MODE= YES
+%
+TARGET_CL= 0.2625 
+%
+DCL_DALPHA= 0.1
+%
+UPDATE_AOA_ITER_LIMIT= 100
+%
+ITER_DCL_DALPHA= 50
+% ---------------------- REFERENCE VALUE DEFINITION ---------------------------%
+%
+REF_ORIGIN_MOMENT_X = 0.25
+REF_ORIGIN_MOMENT_Y = 0.00
+REF_ORIGIN_MOMENT_Z = 0.00
+%
+REF_LENGTH= 1
+%
+REF_AREA= 0
+%
+REF_DIMENSIONALIZATION= FREESTREAM_PRESS_EQ_ONE
+% ----------------------- BOUNDARY CONDITION DEFINITION -----------------------%
+%
+MARKER_EULER= ( WALL )
+%
+MARKER_FAR= ( XNORMAL_FACES , ZNORMAL_FACES, YNORMAL_FACE )
+%
+MARKER_SYM= ( SYMMETRY)
+%
+MARKER_PLOTTING= ( WALL )
+%
+MARKER_MONITORING= ( WALL )
+% ------------- COMMON PARAMETERS DEFINING THE NUMERICAL METHOD ---------------%
+%
+NUM_METHOD_GRAD= GREEN_GAUSS
+%                                            
+OBJECTIVE_FUNCTION= DRAG
+%
+CFL_NUMBER= 7.5
+%
+ITER= 3000
+
+% ------------------------ LINEAR SOLVER DEFINITION ---------------------------%
+%
+LINEAR_SOLVER= FGMRES
+%
+LINEAR_SOLVER_PREC= ILU 
+%
+LINEAR_SOLVER_ERROR= 1E-6
+%
+LINEAR_SOLVER_ITER= 2 
+
+% --------------------- FLOW NUMERICAL METHOD DEFINITION ----------------------%
+%
+CONV_NUM_METHOD_FLOW= JST
+%
+JST_SENSOR_COEFF= ( 0.5, 0.02 )
+%
+TIME_DISCRE_FLOW= EULER_IMPLICIT
+% ----------------------- GEOMETRY EVALUATION PARAMETERS ----------------------%
+%
+GEO_MARKER= ( UPPER_SIDE, LOWER_SIDE, TIP )
+%
+GEO_DESCRIPTION= WING
+%
+GEO_LOCATION_STATIONS= (0.0, 0.2, 0.4, 0.6, 0.8)
+%
+GEO_BOUNDS= (0, 3)
+%
+GEO_PLOT_STATIONS= YES 
+%
+GEO_NUMBER_STATIONS= 25
+%
+GEO_MODE= FUNCTION
+% --------------------------- CONVERGENCE PARAMETERS --------------------------&
+%
+% Convergence criteria (CAUCHY, RESIDUAL)
+CONV_CRITERIA= RESIDUAL
+%
+% Min value of the residual (log10 of the residual)
+CONV_RESIDUAL_MINVAL= -8
+%
+% Start convergence criteria at iteration number
+CONV_STARTITER= 300
+%
+% Epsilon to control the series convergence
+CONV_CAUCHY_EPS= 1E-12
+% ------------------------- INPUT/OUTPUT INFORMATION --------------------------%
+%
+MESH_FILENAME= optimizer_output/mesh_files/wing_0.su2
+%
+MESH_FORMAT= SU2
+%
+TABULAR_FORMAT= CSV
+%
+CONV_FILENAME= history_0
+%
+HISTORY_OUTPUT= (ITER, RMS_RES, AERO_COEFF,FIXED_CL,AOA)
+%
+RESTART_FILENAME= restart_flow_0.dat
+%
+VOLUME_FILENAME= flow
+%
+SURFACE_FILENAME= surface_flow
+%
+WRT_SOL_FREQ= 400
+%
+WRT_SOL_FREQ_DUALTIME= 1
+%
+WRT_CON_FREQ= 10
+%
+WRT_CON_FREQ_DUALTIME= 1
+%
+SCREEN_OUTPUT= (RMS_DENSITY, RMS_ENERGY, LIFT, DRAG, AOA)
+%
+MESH_OUT_FILENAME= mesh_out.su2
+%
+SOLUTION_FILENAME= restart_naca_0.dat
+%
+READ_BINARY_RESTART= YES

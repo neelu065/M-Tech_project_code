@@ -1,0 +1,46 @@
+
+
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+text width=6em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+text width=9em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+minimum height=4em]
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}%[node distance = 2cm, auto]
+    % nodes
+    \node [block] (init) {\Large };
+    \node [block, below of = init] (contact) {\Large };
+    \node [block, below of = contact] (consent) {\Large };
+    \node [decision, below of = consent] (screening) {\Large };
+    \node [block, right of = screening, node distance = 5cm] (refer) {\Large };
+    \node [block, below of = screening, node distance = 3.5cm] (assess0) {\Large };
+    \node [decision, below of = assess0, node distance = 3cm] (followup) {\Large };
+    \node [decision, right of = followup, node distance = 5cm] (confirm){\Large };
+    \node [block, right of = confirm, node distance = 4.8cm] (case){\Large };
+    \node [block, below of = followup, node distance = 3.5cm] (assessn) {\Large };
+    \node [block, left of = followup, node distance = 4cm] (interval) {\Large };
+    \node [block, below of = assessn, node distance = 2.5cm] (end) {\Large };
+    \node [block, below of = case, node distance = 3cm] (bloodcase) {\Large };
+    % edges
+    \path [line] (init) -- (contact);
+    \path [line] (contact) -- (consent);
+    \path [line] (consent) -- (screening);
+    \path [line] (screening) -- node {eligible}(assess0);
+    \path [line] (screening) -- node {\Large no}(refer);
+    \path [line] (assess0) -- (followup);
+    \path [line] (followup) -- node {\Large no}(confirm);
+    \path [line] (followup) -- node {\Large yes}(assessn);
+    \path [line] (assessn) -| node {\Large 2 years}(interval);
+    \path [line] (interval) -- (followup);
+    \path [line] (confirm) -- node {\Large yes}(case);
+    \path [line] (confirm) |- node {\Large no}(assessn);
+    \path [line] (assessn) -- (end);
+    \path [line] (case) -- (bloodcase);
+  \end{tikzpicture}
+\end{figure}
+

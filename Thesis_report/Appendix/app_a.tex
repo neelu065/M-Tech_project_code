@@ -1,0 +1,48 @@
+\chapter{ Formula related to GB}
+\label{chap:app_a}
+\section{Gradient vector}
+Following equation represents the mathematical form to calculate gradient of n-dimensions.
+
+\begin{equation}
+\boxed{
+c = d f_{x^*}={\left[\frac{\partial f}{\partial x_{1}}(x*),  \cdots ,\frac{\partial f}{\partial x_{n}}(x*)\right]}^T
+\label{gradient_vector}
+}
+\end{equation}
+
+
+where c is gradient vector, $f(x)$ is function of $x$, and $\frac{\partial f}{\partial x_{n}}$ is the partial derivative of function with respect $x^k$.
+
+\section{Hessian matrix}
+If the given function $f(x)$ is twice differentiable, then the Hessian matrix will be,
+
+\begin{equation}
+\mathbf{H}=\left[\begin{array}{cccc}
+\frac{\partial^{2} f}{\partial x_{1}^{2}} & \frac{\partial^{2} f}{\partial x_{1} \partial x_{2}} & \cdots & \frac{\partial^{2} f}{\partial x_{1} \partial x_{n}} \\
+\frac{\partial^{2} f}{\partial x_{2} \partial x_{1}} & \frac{\partial^{2} f}{\partial x_{2}^{2}} & \cdots & \frac{\partial^{2} f}{\partial x_{2} \partial x_{n}} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial^{2} f}{\partial x_{n} \partial x_{1}} & \frac{\partial^{2} f}{\partial x_{n} \partial x_{2}} & \cdots & \frac{\partial^{2} f}{\partial x_{n}^{2}}
+\end{array}\right]
+\label{Hessian_matrix}
+\end{equation}
+
+or in the index form it can be represented as,
+
+\begin{equation}
+\boxed{\mathbf{H}_{i, j}=\frac{\partial^{2} f}{\partial x_{i} \partial x_{j}}}
+\end{equation}
+The Hessian matrix is symmetric, this implies,
+ \begin{equation}
+\boxed{\frac{\partial^{2} f}{\partial x_{j} \partial x_{i}}=\frac{\partial^{2} f}{\partial x_{i} \partial x_{j}}}
+\end{equation}
+
+\section{Taylor series}
+Below equation is the $n^{th}$ - order representation of taylor series in matrix notation,
+\begin{equation}
+    \boxed{
+    f(x) = f(x^*) + \nabla f^T (x - x^*) + \frac{1}{2} (x - x^*)^T H (x - x ^*) + R 
+    }
+    \label{Taylor_equation}
+\end{equation}
+
+where, $\nabla$ is divergence of $f$, H is Hessian matrix, and R is residual of the equation.
