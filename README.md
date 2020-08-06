@@ -4,10 +4,6 @@ Please **do not** rename the respective folder names as they are all interconnec
  
 Instead copy both the folders and place inside new directory and execute the files as follows.
 
-> - **sbatch Project_code_fNRAND1/compute_wait.sh**
->
->> This is hold the entire node(28 CPU) in compute nodes exclusive for USER.
-
 > - **sbatch wing_FFD_SVD/wing(1000)_generator.sh**
 >
 >> This will create the 1000 random wings within given constraints.
@@ -24,6 +20,9 @@ Instead copy both the folders and place inside new directory and execute the fil
 >> Since there is communication error with license file(-17), above command cannot be submitted.  
 >> However, except meshing, all work is carried out in compute node.
 
+> - **sbatch Project_code_fNRAND1/compute_wait.sh**
+>
+>> This is hold the entire node(28 CPU) in compute nodes exclusive for USER.
 
 > - **python Project_code_fNRAND1/paraview_gen.py**
 >
