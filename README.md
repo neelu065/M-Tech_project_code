@@ -27,8 +27,7 @@ Instead, copy both the folders and place inside a new directory and execute the 
 > - **python Project_code_fNRAND1/paraview_gen.py**
 >
 >> This will generate the solution (*.vtk) files in the optimizer_output/solution_final/ (volume_flow and surface_flow)/ *.     
-
-Above command should be executed only after all generation are completed.
+>> Above command should be executed only after all generation are completed.
 
 **Note: All the above commands have to be executed by directing the terminal to *README.md* location**.
 
