@@ -1,12 +1,10 @@
-
 % Define block styles
-
 \tikzstyle{block} = [rectangle, draw, fill=blue!20, text centered, rounded corners, text width=10em]
 \tikzstyle{line} = [draw, -latex']
 \tikzstyle{block1} = [rectangle, draw, fill=blue!20, text centered, text width=10em]
 \tikzstyle{block12} = [trapezium, trapezium left angle=70, trapezium right angle=110, text centered, draw=black, fill=blue!20, text width=10em]
 
-\begin{figure}
+\begin{figure}[!htbp]
   \centering
   \begin{tikzpicture}[node distance = 2cm, auto]
     % nodes
@@ -17,11 +15,11 @@
     \node [block, below of= ffd_box, node distance = 2cm] (final) {\large Perturbed cartesian wing coordinates};
     
     % edges
-    \path [line] (continue) -- (parameter);
-    \path [line] (continue) -| (cp_new);
-    \path [line] (parameter) -- (ffd_box);
-    \path [line] (cp_new) |- (ffd_box);
-    \path [line] (ffd_box) -- (final);
+    \path [line] (continue) -- node {parametric\textunderscore{coord.py}}(parameter);
+    \path [line] (continue) -| node {random\textunderscore{perturbation.py}}(cp_new);
+    \path [line] (parameter) -- node {main.py} (ffd_box);
+    \path [line] (cp_new) |- node {main.py} (ffd_box);
+    \path [line] (ffd_box) -- node {X\textunderscore{new.py}}(final);
   \end{tikzpicture}
   \caption{Block diagram representing the input and output to FFD box equation.}
   \label{ffd_diagram}

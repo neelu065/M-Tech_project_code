@@ -1,6 +1,4 @@
-
 % Define block styles
-
 \tikzstyle{block} = [rectangle, draw, fill=blue!20, 
 text width=25em, text centered, rounded corners, minimum height=3em]
 \tikzstyle{line} = [draw, -latex']
@@ -16,17 +14,16 @@ text width=25em, text centered, minimum height=3em]
     \node [block1, below of = new1] (inte) {\Large Wing surface generation (baseline wing)};
     \node [block1, below of = inte] (inte2) {\Large FFD box over the baseline wing};
     \node [block1, below of = inte2] (inte3) {\Large FFD box corner control points};
-    \node [block1, below of = inte3] (inte4) {\Large Interpolation of the FFD corner points};
+    \node [block1, below of = inte3] (inte4) {\Large Layers of the FFD points};
     \node [block1, below of = inte4] (final) {\Large Cartesian coordinates of all control points (*.csv)};
     \node [block, below of = final] (continue) {\Large Continue ...};
-   
     % edges
-    \path [line] (init) -- node {\Large python script} (new1);
-    \path [line] (new1) -- node {\Large extrude in span direction} (inte);
-    \path [line] (inte) -- node {\Large glyph script} (inte2);
-    \path [line] (inte2) -- node {\Large outcome } (inte3) ;
-    \path [line] (inte3) -- node {\Large python script} (inte4) ;
-    \path [line] (inte4) -- node {\Large outcome} (final) ;
+    \path [line] (init) -- node {\Large airfoil.py} (new1);
+    \path [line] (new1) -- node {\Large Pointwise} (inte);
+    \path [line] (inte) -- node {\Large createFFD.glf} (inte2);
+    \path [line] (inte2) -- node {\Large  } (inte3) ;
+    \path [line] (inte3) -- node {\Large interpolate.py} (inte4) ;
+    \path [line] (inte4) -- node {\Large random\textunderscore{perturbation.py}} (final) ;
     \path [line] (final) -- (continue) ;
   \end{tikzpicture}
   \caption{Flowchart representing the steps involved in generating the perturbed control points}

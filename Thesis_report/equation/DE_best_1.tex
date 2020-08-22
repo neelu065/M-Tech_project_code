@@ -1,5 +1,8 @@
-$$\mathbf{v}_{n}=\mathbf{x}_{b}(t)+F\left(\mathbf{x}_{r_{1}}(t)-\mathbf{x}_{r_{2}}(t)\right)$$
+\begin{equation}
+    \mathbf{v}_{n, g}=\mathbf{x}_{b, g-1}+F.\left(\mathbf{x}_{r_{1}, g}-\mathbf{x}_{r_{2}, g}\right)
+    \label{DE-best-1}
+\end{equation}
 where,
 $$
-b=\underset{i \in\{1, \ldots, N\}}{\arg \min } f\left(\mathbf{x}_{i}\right)
+b=\underset{i \in\{1, \ldots, N\}}{\arg \min } f\left(\mathbf{x}_{i, g-1}\right)
 $$
