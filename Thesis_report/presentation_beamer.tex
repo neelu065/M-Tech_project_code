@@ -1,0 +1,32 @@
+\documentclass[11pt]{beamer}
+\usetheme{Hannover}
+\usepackage{pdfpages}
+\usepackage[font=tiny]{caption}
+\usepackage{array}
+\usepackage{biblatex}               % add this to main beamer file containing all members slides
+\addbibresource{misc/references.bib}     % add this to main beamer file containing all members slides
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\usefonttheme{professionalfonts}
+\fontsize{8}{7.2}\selectfont 
+\setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{itemize/enumerate body begin}{\fontsize{7pt} {7.2}\selectfont}
+\setbeamertemplate{itemize/enumerate subbody begin}{\fontsize{7pt} {7.2}\selectfont}
+\date{}
+
+\begin{document}
+\input{frame/title}
+\fontsize{8}{7.2}\selectfont  
+\input{frame/Introduction}
+\input{frame/problem_statement}
+\input{frame/literature}
+\input{frame/Algorithm}
+\input{frame/parameterization}
+\input{frame/Reduced order modelling}
+\input{frame/Methodology}
+\input{frame/Results}
+\input{frame/bibliography}
+%\input{frame/appendix}
+\end{document}

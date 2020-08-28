@@ -1,0 +1,59 @@
+\documentclass[mtech,thesis,twoside]{misc/iist}
+\usepackage{times}
+
+\title{Multimodal optimization of NACA0012 wing with differential evolution based parallel niching algorithm and reduced-order modeling technique.}
+\author{Neelappagouda V Hiregoudar}
+\studentid{SC18M033}
+\advisor{Devendra Prakash Ghate}
+\specialization{Aerodynamics and Flight Mechanics}
+\department{Aerospace Engineering}
+\date{July 2020}
+
+
+%% ---- Document starts here ---- %%
+\begin{document}
+
+%% ---- Make the initial set of pages ---- %%
+\maketitle % Title page
+\makecertificate % Certificate 
+\makedeclaration % Declaration
+\makededication % Dedication
+\makeacknowledgements % Acknowledgements
+\makeabstract % Abstract
+\maketableofcontents % Table of contents
+\makelistoffigures % List of figures
+\makelistoftables % List of tables
+\makelistofalgorithms % List of algorithms
+\makeabbreviations % List of abbreviations
+\makenomenclature % Nomenclature (for symbols used)
+
+% Initialize chapter settings; DO NOT comment this line
+\makechaptersettings 
+
+%% ---- Start chapters here ---- %%
+\input{chapter/Introduction}
+\input{chapter/literature_review}
+\input{chapter/niching}
+\input{chapter/parameterization}
+\input{chapter/solver}
+\input{chapter/methodology}
+\input{chapter/conclusion}
+
+%% ---- Bibliography addition ----%%
+\makebibsettings
+\bibliographystyle{misc/IEEEtran}
+\bibliography{misc/references}
+
+%% ---- List of Publications ----%%
+%\makepublications
+
+%% ---- Appendices starts here ---- %%
+\makeappendixsettings
+\input{Appendix/app_a}
+\input{Appendix/app_c}
+\input{Appendix/app_f}
+
+%% ---- Index starts here ---- %%
+\makeindexsettings
+
+\end{document}

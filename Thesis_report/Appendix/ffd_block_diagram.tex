@@ -4,13 +4,13 @@
 \tikzstyle{block1} = [rectangle, draw, fill=blue!20, text centered, text width=10em]
 \tikzstyle{block12} = [trapezium, trapezium left angle=70, trapezium right angle=110, text centered, draw=black, fill=blue!20, text width=10em]
 
-\begin{figure}[!htbp]
+\begin{figure}
   \centering
-  \begin{tikzpicture}[node distance = 2cm, auto]
+  \begin{tikzpicture}[node distance = 1.5cm, auto]
     % nodes
     \node [block] (continue) {\Large Continued ...};
     \node [block12, below of = continue] (parameter) {\large Parametric baseline wing};
-    \node [block12, right of = parameter, node distance = 7cm] (cp_new) {\large Perturbed control points};
+    \node [block12, right of = parameter, node distance = 4cm] (cp_new) {\large Perturbed control points};
     \node [block1, below of= parameter, node distance = 2cm] (ffd_box) {\large FFD box equation};
     \node [block, below of= ffd_box, node distance = 2cm] (final) {\large Perturbed cartesian wing coordinates};
     
