@@ -1,0 +1,35 @@
+\begin{frame}[allowframebreaks]{\underline{Reduced order modelling} -}
+    \section{Reduced order modelling}
+    
+\begin{itemize}
+\item The DE based niching algorithm is not tested for the higher dimension
+problem, resulting in reconsider to reduce the problem dimension. 
+\item The preferred way to carry out the dimension reduction is by finding principal components called as principal component analysis.
+\end{itemize}
+\vspace{1mm}
+Following are the steps to carry out the PCA.
+\begin{itemize}
+    
+\item Step 1: Finding the error vector of each wing:
+    The error from the nominal geometry is given as,
+$$x_{i, j}^{\prime}=\hat{x}_{i, j}-x_{i}^{0}$$
+where, $x_{i}^{0}$ is the baseline coordinates (NACA0012) and $\hat{x}_{i, j}$ coordinates of given wing.
+\item Step 2: Finding centered error vector$\tilde{x}_{i, j}$:
+\begin{equation}
+\tilde{x}_{i, j}=x_{i, j}^{\prime}-\bar{x}_{i} \mid i=1, \ldots, p ; j=1, \ldots, n
+\end{equation}
+
+where, the mean of these error vectors is calculated as follows.
+\begin{equation}
+\bar{x}_{i}=\frac{1}{n} \sum_{j=1}^{n} x_{i, j}^{\prime}, i=1, \ldots, p
+\end{equation}
+
+\item Step 3: Singular value decomposition (SVD):
+\begin{equation}
+\tilde{X}=M \Sigma N^{T}
+\end{equation}
+
+Here, M, N are $mp \times mp$, $n \times n$ orthonormal matrix respectively. And, $\Sigma$ is $mp \times n$ is a diagonal entries ordered in decreasing value. 
+\end{itemize}
+Based on the leading $\Sigma$ values, the dimension of the problem is decided.sss
+\end{frame}
